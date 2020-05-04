@@ -51,6 +51,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="meN-Af-5nJ" kind="showDetail" identifier="TableSegue" id="zsd-yE-0jg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ebl-8B-f3e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,4 +190,7 @@
             <point key="canvasLocation" x="137" y="128"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zsd-yE-0jg"/>
+    </inferredMetricsTieBreakers>
 </document>

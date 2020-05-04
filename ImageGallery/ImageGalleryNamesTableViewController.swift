@@ -112,7 +112,20 @@ class ImageGalleryNamesTableViewController: UITableViewController {
         }else{
             return nil
         }
-}
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("seleccione seccion \(indexPath.section) fila \(indexPath.row)")
+        if (indexPath.section != 1){
+            performSegue(withIdentifier:"TableSegue", sender: indexPath)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier  == "TableSegue"{
+            print("mySegue")
+        }
+    }
     
     /*
     // Override to support rearranging the table view.
