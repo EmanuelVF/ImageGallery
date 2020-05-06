@@ -106,5 +106,22 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
         print("pase por aqui tambien\(flowLayout!.minimumLineSpacing)")
         return flowLayout!.minimumLineSpacing
     }
+    
+    // MARK: Segue!!!
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier:"DetailZoom", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier  == "DetailZoom"{
+            if let indexPath = (sender as? IndexPath)?.item{
+                if let cvc = segue.destination.contents as? ImageZoomViewController{
+                    let keysArray = Array(ImageGallery.Gallery[gallery!].keys)
+                    cvc.imageURL = keysArray[indexPath]
+                }
+            }
+        }
+    }
 }
 
