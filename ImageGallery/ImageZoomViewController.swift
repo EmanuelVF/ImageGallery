@@ -80,9 +80,8 @@ class ImageZoomViewController: UIViewController, UIScrollViewDelegate {
     private func fetchImage(){
         if let url = imageURL{
             spinnerImage.startAnimating()
-
             DispatchQueue.global(qos:.userInitiated).async { [weak self] in  // This weak is added if self doesn't exist when the image is loaded. It is not related with memory cycles
-                let urlContents = try? Data(contentsOf: url) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
+                let urlContents = try? Data(contentsOf: url.imageURL) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
                 DispatchQueue.main.async {
                     if let imageData = urlContents, url == self?.imageURL{ // to keep updated url
                         self?.image = UIImage(data: imageData)

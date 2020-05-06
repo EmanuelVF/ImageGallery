@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ImageGalleryNamesTableViewController: UITableViewController {
+class ImageGalleryNamesTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        splitViewController?.delegate = self
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +29,20 @@ class ImageGalleryNamesTableViewController: UITableViewController {
         if splitViewController?.preferredDisplayMode != .primaryOverlay{
             splitViewController?.preferredDisplayMode = .primaryOverlay
         }
+    }
+    
+    func splitViewController(
+        _ splitViewController: UISplitViewController,
+        collapseSecondary secondaryViewController: UIViewController,
+        onto primaryViewController: UIViewController) -> Bool {
+        if let cvc = secondaryViewController as? UINavigationController{
+            if let fvc = (cvc.visibleViewController as? ImageGalleryViewController){
+                if fvc.gallery == nil{
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     // MARK: - Table view data source
@@ -75,12 +93,16 @@ class ImageGalleryNamesTableViewController: UITableViewController {
             if indexPath.section == 0{
                 let item = ImageGallery.galleryNames.remove(at: indexPath.row)
                 let galleryItem = ImageGallery.Gallery.remove(at: indexPath.row)
+                let aspecRatioItem = ImageGallery.AspectRatios.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 ImageGallery.galleryNamesRemoved.append(item)
                 ImageGallery.DeletedGallery.append(galleryItem)
+                ImageGallery.DeletedAspectRatios.append(aspecRatioItem)
                 tableView.reloadData()
+                //performSegue(withIdentifier:"DeleteSegue", sender: indexPath)
             }else{
                 ImageGallery.galleryNamesRemoved.remove(at: indexPath.row)
+                ImageGallery.DeletedAspectRatios.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 ImageGallery.DeletedGallery.remove(at: indexPath.row)
             }
@@ -91,7 +113,8 @@ class ImageGalleryNamesTableViewController: UITableViewController {
     
     @IBAction func addGallery(_ sender: UIBarButtonItem) {
         ImageGallery.galleryNames.append("Untitled".madeUnique(withRespectTo: ImageGallery.galleryNames))
-        //add an empty thing
+        ImageGallery.Gallery.append([nil])
+        ImageGallery.AspectRatios.append([1.0])
         tableView.reloadData()
     }
     
@@ -99,10 +122,12 @@ class ImageGalleryNamesTableViewController: UITableViewController {
         
         let swipe = UIContextualAction(style: .normal, title: "Undelete"){(action, sourceView, completionHandler) in
             let item = ImageGallery.galleryNamesRemoved.remove(at: indexPath.row)
+            let aspectItem = ImageGallery.DeletedAspectRatios.remove(at: indexPath.row)
             let galleryItem = ImageGallery.DeletedGallery.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             ImageGallery.galleryNames.append(item)
             ImageGallery.Gallery.append(galleryItem)
+            ImageGallery.AspectRatios.append(aspectItem)
             tableView.reloadData()
             completionHandler(true)
         }
@@ -131,6 +156,11 @@ class ImageGalleryNamesTableViewController: UITableViewController {
                     cvc.title = ImageGallery.galleryNames[indexPath]
                 }
             }
-        }
+        }else if segue.identifier  == "DeleteSegue"{
+                if let cvc = segue.destination.contents as? ImageGalleryViewController{
+                    cvc.gallery = nil
+                    cvc.title = nil
+                }
+            }
     }
 }

@@ -53,6 +53,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="meN-Af-5nJ" kind="showDetail" identifier="TableSegue" id="zsd-yE-0jg"/>
+                        <segue destination="meN-Af-5nJ" kind="showDetail" identifier="DeleteSegue" id="4QO-LT-Qtg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ebl-8B-f3e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -106,12 +107,19 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropPlaceHolderCell" id="2sk-Sg-shz">
-                                        <rect key="frame" x="223" y="90.5" width="50" height="50"/>
+                                        <rect key="frame" x="243.5" y="0.0" width="217" height="231"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fb0-d1-RgU">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="217" height="231"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="XJn-8d-yv1">
+                                                    <rect key="frame" x="98" y="105" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="217" height="231"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -230,6 +238,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zsd-yE-0jg"/>
+        <segue reference="4QO-LT-Qtg"/>
     </inferredMetricsTieBreakers>
 </document>

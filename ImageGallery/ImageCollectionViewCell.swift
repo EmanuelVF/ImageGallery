@@ -39,18 +39,20 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     private func fetchImage(){
+        print("A buscar la foto!")
             if let url = imageURL{
                 spinner.startAnimating()
                 DispatchQueue.global(qos:.userInitiated).async { [weak self] in  // This weak is added if self doesn't exist when the image is loaded. It is not related with memory cycles
-                    let urlContents = try? Data(contentsOf: url) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
+                    let urlContents = try? Data(contentsOf: url.imageURL) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
                     DispatchQueue.main.async {
                         if let imageData = urlContents, url == self?.imageURL{ // to keep updated url
+                            print("Traje la foto otra vez!")
                             self?.image = UIImage(data: imageData)
-                            self?.aspectRatio = self!.image!.size.width/self!.image!.size.height
+                            self?.aspectRatio = (self!.image?.size.width ?? 1)/(self!.image?.size.height ?? 1)
                             for index in ImageGallery.Gallery.indices{
-                                for key in ImageGallery.Gallery[index].keys{
-                                    if key == url{
-                                        ImageGallery.Gallery[index][url] = Double(self!.aspectRatio)
+                                for key in ImageGallery.Gallery[index].indices{
+                                    if ImageGallery.Gallery[index][key] == url{
+                                        ImageGallery.AspectRatios[index][key] = Double(self!.aspectRatio)
                                     }
                                 }
                             }
