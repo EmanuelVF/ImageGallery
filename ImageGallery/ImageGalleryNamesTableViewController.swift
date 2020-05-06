@@ -20,24 +20,19 @@ class ImageGalleryNamesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    var galleryNames = ["Planets", "Cities", "Landscapes"]
-    var galleryNamesRemoved = ["Dogs", "Cats"]
-    var sectionNames = ["", "Recently Deleted"]
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of section
-        return 2
-        
+        return ImageGallery.sectionNames.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if (section == 0){
-            return galleryNames.count
+            return ImageGallery.galleryNames.count
         }else{
-            return galleryNamesRemoved.count
+            return ImageGallery.galleryNamesRemoved.count
         }
     }
 
@@ -46,16 +41,16 @@ class ImageGalleryNamesTableViewController: UITableViewController {
 
         // Configure the cell...
         if indexPath.section == 0{
-            cell.textLabel?.text = galleryNames[indexPath.row]
+            cell.textLabel?.text = ImageGallery.galleryNames[indexPath.row]
         }else{
-            cell.textLabel?.text = galleryNamesRemoved[indexPath.row]
+            cell.textLabel?.text = ImageGallery.galleryNamesRemoved[indexPath.row]
         }
         
         return cell
     }
    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionNames[section]
+        return ImageGallery.sectionNames[section]
     }
     
     
@@ -71,35 +66,36 @@ class ImageGalleryNamesTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             if indexPath.section == 0{
-                let item = galleryNames.remove(at: indexPath.row)
+                let item = ImageGallery.galleryNames.remove(at: indexPath.row)
+                let galleryItem = ImageGallery.Gallery.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                galleryNamesRemoved.append(item)
+                ImageGallery.galleryNamesRemoved.append(item)
+                ImageGallery.DeletedGallery.append(galleryItem)
                 tableView.reloadData()
             }else{
-                galleryNamesRemoved.remove(at: indexPath.row)
+                ImageGallery.galleryNamesRemoved.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                if galleryNamesRemoved.count == 0{
-//                    tableView.reloadSections(IndexSet(1))
-                }
+                ImageGallery.DeletedGallery.remove(at: indexPath.row)
             }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
     
     @IBAction func addGallery(_ sender: UIBarButtonItem) {
-        galleryNames.append("Untitled".madeUnique(withRespectTo: galleryNames))
+        ImageGallery.galleryNames.append("Untitled".madeUnique(withRespectTo: ImageGallery.galleryNames))
+        //add an empty thing
         tableView.reloadData()
     }
-    
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let swipe = UIContextualAction(style: .normal, title: "Undelete"){(action, sourceView, completionHandler) in
-            let item = self.galleryNamesRemoved.remove(at: indexPath.row)
+            let item = ImageGallery.galleryNamesRemoved.remove(at: indexPath.row)
+            let galleryItem = ImageGallery.DeletedGallery.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            self.galleryNames.append(item)
+            ImageGallery.galleryNames.append(item)
+            ImageGallery.Gallery.append(galleryItem)
             tableView.reloadData()
             completionHandler(true)
         }
@@ -115,7 +111,6 @@ class ImageGalleryNamesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("seleccione seccion \(indexPath.section) fila \(indexPath.row)")
         if (indexPath.section != 1){
             performSegue(withIdentifier:"TableSegue", sender: indexPath)
         }
@@ -123,33 +118,12 @@ class ImageGalleryNamesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier  == "TableSegue"{
-            print("mySegue")
+            if let indexPath = (sender as? IndexPath)?.row{
+                if let cvc = segue.destination.contents as? ImageGalleryViewController{
+                    cvc.gallery = indexPath
+                    cvc.title = ImageGallery.galleryNames[indexPath]
+                }
+            }
         }
     }
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

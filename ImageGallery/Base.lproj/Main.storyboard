@@ -70,17 +70,45 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ky8-Mx-ev1">
                                 <rect key="frame" x="0.0" y="50" width="703.5" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gKC-V9-oFc">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="gKC-V9-oFc">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="x7L-sg-Gpn">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ImageCell" id="x7L-sg-Gpn" customClass="ImageCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="217" height="231"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wiU-KD-Dko">
+                                            <rect key="frame" x="0.0" y="0.0" width="217" height="231"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8cc-il-d10">
+                                                    <rect key="frame" x="0.0" y="0.0" width="217" height="231"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="5VL-Za-3bv">
+                                                    <rect key="frame" x="99" y="105" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="8cc-il-d10" secondAttribute="trailing" id="86X-VT-khB"/>
+                                                <constraint firstAttribute="bottom" secondItem="8cc-il-d10" secondAttribute="bottom" id="Iif-m1-d2s"/>
+                                                <constraint firstItem="8cc-il-d10" firstAttribute="leading" secondItem="wiU-KD-Dko" secondAttribute="leading" id="YGX-wF-bTe"/>
+                                                <constraint firstItem="8cc-il-d10" firstAttribute="top" secondItem="wiU-KD-Dko" secondAttribute="top" id="g8F-5V-25m"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="217" height="231"/>
+                                        <connections>
+                                            <outlet property="imagePlace" destination="8cc-il-d10" id="z9r-b5-EMx"/>
+                                            <outlet property="spinner" destination="5VL-Za-3bv" id="JWO-U4-tAJ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropPlaceHolderCell" id="2sk-Sg-shz">
+                                        <rect key="frame" x="223" y="90.5" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fb0-d1-RgU">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
@@ -99,12 +127,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="mMf-i4-v4y"/>
                     <connections>
+                        <outlet property="imagesCollectionView" destination="ky8-Mx-ev1" id="Hle-hH-907"/>
                         <segue destination="Tp8-AR-Fdi" kind="show" id="aOc-Be-U8x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="861" y="129"/>
+            <point key="canvasLocation" x="860.7421875" y="128.90625"/>
         </scene>
         <!--Image Zoom View Controller-->
         <scene sceneID="0OQ-1l-y0F">
