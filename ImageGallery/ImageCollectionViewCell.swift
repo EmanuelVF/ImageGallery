@@ -15,10 +15,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     var imageURL : URL?{
         didSet{
             image = nil
-//            if imagePlace.window != nil{
-                fetchImage()
-                print("Fetch!")
-//            }
+            fetchImage()
         }
     }
     
