@@ -46,11 +46,6 @@ class ImageZoomViewController: UIViewController, UIScrollViewDelegate {
             scrollImage?.contentSize = size
             scrollViewHieght?.constant = size.height
             scrollViewWidth?.constant = size.width
-//            if let dropZone = self.dropZone, size.width > 0, size.height > 0 {
-//                scrollView?.zoomScale = max(dropZone.bounds.size.width / size.width, dropZone.bounds.size.height / size.height)
-//            }
-            
-            
         }
     }
     
@@ -65,6 +60,7 @@ class ImageZoomViewController: UIViewController, UIScrollViewDelegate {
             fetchImage()
         }
     }
+    
     var imageView = UIImageView()
 
     @IBOutlet weak var scrollImage: UIScrollView!{
@@ -76,24 +72,25 @@ class ImageZoomViewController: UIViewController, UIScrollViewDelegate {
             
         }
     }
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
             return imageView
         }
         
-        private func fetchImage(){
-            if let url = imageURL{
-                spinnerImage.startAnimating()
+    private func fetchImage(){
+        if let url = imageURL{
+            spinnerImage.startAnimating()
 
-                DispatchQueue.global(qos:.userInitiated).async { [weak self] in  // This weak is added if self doesn't exist when the image is loaded. It is not related with memory cycles
-                    let urlContents = try? Data(contentsOf: url) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
-                    DispatchQueue.main.async {
-                        if let imageData = urlContents, url == self?.imageURL{ // to keep updated url
-                            self?.image = UIImage(data: imageData)
-                        }
+            DispatchQueue.global(qos:.userInitiated).async { [weak self] in  // This weak is added if self doesn't exist when the image is loaded. It is not related with memory cycles
+                let urlContents = try? Data(contentsOf: url) // ? is added to handle the throws. If I am interested in the error, then the try catch should be done
+                DispatchQueue.main.async {
+                    if let imageData = urlContents, url == self?.imageURL{ // to keep updated url
+                        self?.image = UIImage(data: imageData)
                     }
-                    
                 }
                 
             }
+            
         }
+    }
 }
