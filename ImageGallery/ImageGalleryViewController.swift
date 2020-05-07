@@ -10,6 +10,12 @@ import UIKit
 
 class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDropDelegate, UICollectionViewDragDelegate {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        flowLayout?.invalidateLayout()
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+    }
     var gallery : Int? = nil{
         didSet{
             if gallery != nil{
@@ -36,6 +42,7 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     var scale: CGFloat = 1  {
         didSet {
             flowLayout?.invalidateLayout()
+            imagesCollectionView?.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -185,7 +192,6 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
                 let placeHolderContext = coordinator.drop(item.dragItem, to: UICollectionViewDropPlaceholder(
                     insertionIndexPath: destinationIndex,
                     reuseIdentifier: "DropPlaceHolderCell"))
-                
                 item.dragItem.itemProvider.loadObject(ofClass: NSURL.self) {(provider,error) in
                     DispatchQueue.main.async {
                         if let myURL = provider as? URL{

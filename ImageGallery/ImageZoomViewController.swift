@@ -39,7 +39,6 @@ class ImageZoomViewController: UIViewController, UIScrollViewDelegate {
             imageView.sizeToFit()
             scrollImage?.contentSize = imageView.frame.size
             spinnerImage?.stopAnimating()
-            
             scrollImage?.zoomScale = 1.0
             let size = newValue?.size ?? CGSize.zero
             imageView.frame = CGRect(origin: CGPoint.zero, size: size)

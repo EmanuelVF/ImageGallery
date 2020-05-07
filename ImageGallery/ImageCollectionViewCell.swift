@@ -21,7 +21,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     var aspectRatio : CGFloat = 1.0{
         didSet{
-            setNeedsLayout()
+            
         }
     }
    
@@ -32,6 +32,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         set {
             imagePlace.image = newValue
             spinner.stopAnimating()
+            imagePlace.sizeToFit()
         }
     }
     
