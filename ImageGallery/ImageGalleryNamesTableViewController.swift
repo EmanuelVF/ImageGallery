@@ -62,16 +62,38 @@ class ImageGalleryNamesTableViewController: UITableViewController, UISplitViewCo
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        
 
         // Configure the cell...
         if indexPath.section == 0{
-            cell.textLabel?.text = ImageGallery.galleryNames[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryNameCell", for: indexPath)
+            if let inputCell = cell as? GalleryNameTableViewCell{
+                let tap = UITapGestureRecognizer(target: self, action: #selector(startEditingText(sender:)))
+                tap.numberOfTapsRequired = 2
+                inputCell.addGestureRecognizer(tap)
+                inputCell.nameTextField.text = ImageGallery.galleryNames[indexPath.item]
+                inputCell.nameTextField.isUserInteractionEnabled = false
+                inputCell.resignationHandler = { [weak self, unowned inputCell] in
+                    if let text = inputCell.nameTextField.text{
+                        ImageGallery.galleryNames[indexPath.item] = text
+                    }
+                    self?.tableView.reloadData()
+                    self?.performSegue(withIdentifier:"TableSegue", sender: indexPath)
+                }
+            }
+            return cell
         }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
             cell.textLabel?.text = ImageGallery.galleryNamesRemoved[indexPath.row]
+            return cell
         }
-        
-        return cell
+    }
+    
+    @objc func startEditingText(sender : UITapGestureRecognizer){
+        if let myCell = sender.view as? GalleryNameTableViewCell{
+            
+            myCell.startEditing()
+        }
     }
    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -142,9 +164,14 @@ class ImageGalleryNamesTableViewController: UITableViewController, UISplitViewCo
         }
     }
     
+    var lastRow : Int? = nil
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section != 1){
-            performSegue(withIdentifier:"TableSegue", sender: indexPath)
+            if indexPath.item != lastRow {
+                performSegue(withIdentifier:"TableSegue", sender: indexPath)
+                lastRow = indexPath.item
+            }
         }
     }
     

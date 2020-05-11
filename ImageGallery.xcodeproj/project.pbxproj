@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		881E77A824607209002105DB /* ImageGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E77A724607209002105DB /* ImageGallery.swift */; };
+		88E131A024699551009491FA /* GalleryNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E1319F24699551009491FA /* GalleryNameTableViewCell.swift */; };
 		88EF0C7D245CC11200ADC1A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF0C7C245CC11200ADC1A6 /* AppDelegate.swift */; };
 		88EF0C7F245CC11200ADC1A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF0C7E245CC11200ADC1A6 /* SceneDelegate.swift */; };
 		88EF0C84245CC11200ADC1A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88EF0C82245CC11200ADC1A6 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		881E77A724607209002105DB /* ImageGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGallery.swift; sourceTree = "<group>"; };
+		88E1319F24699551009491FA /* GalleryNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryNameTableViewCell.swift; sourceTree = "<group>"; };
 		88EF0C79245CC11200ADC1A6 /* ImageGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EF0C7C245CC11200ADC1A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88EF0C7E245CC11200ADC1A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				88EF0C82245CC11200ADC1A6 /* Main.storyboard */,
 				88EF0C91245CC41800ADC1A6 /* ImageGalleryNamesTableViewController.swift */,
+				88E1319F24699551009491FA /* GalleryNameTableViewCell.swift */,
 				88EF0C97245CC6A200ADC1A6 /* ImageGalleryViewController.swift */,
 				88EF0C95245CC65100ADC1A6 /* ImageCollectionViewCell.swift */,
 				88EF0C9B245CC79900ADC1A6 /* ImageZoomViewController.swift */,
@@ -173,6 +176,7 @@
 				88EF0C94245CC5E500ADC1A6 /* Utilities.swift in Sources */,
 				88EF0C92245CC41800ADC1A6 /* ImageGalleryNamesTableViewController.swift in Sources */,
 				88EF0C9C245CC79900ADC1A6 /* ImageZoomViewController.swift in Sources */,
+				88E131A024699551009491FA /* GalleryNameTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

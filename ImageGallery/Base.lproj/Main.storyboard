@@ -38,6 +38,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GalleryNameCell" id="dg3-85-hiH" customClass="GalleryNameTableViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="71.5" width="320" height="50.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dg3-85-hiH" id="zVw-p3-sIj">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AWw-I5-qZV">
+                                            <rect key="frame" x="8" y="8" width="304" height="34.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="AWw-I5-qZV" firstAttribute="centerY" secondItem="zVw-p3-sIj" secondAttribute="centerY" id="6Qm-mP-joC"/>
+                                        <constraint firstItem="AWw-I5-qZV" firstAttribute="centerX" secondItem="zVw-p3-sIj" secondAttribute="centerX" id="7jC-Wz-8Jv"/>
+                                        <constraint firstItem="AWw-I5-qZV" firstAttribute="top" secondItem="zVw-p3-sIj" secondAttribute="top" constant="8" id="FQa-Rl-Gtn"/>
+                                        <constraint firstItem="AWw-I5-qZV" firstAttribute="leading" secondItem="zVw-p3-sIj" secondAttribute="leading" constant="8" id="Uxm-a8-Uqr"/>
+                                        <constraint firstAttribute="bottom" secondItem="AWw-I5-qZV" secondAttribute="bottom" constant="8" id="kAu-W3-K3w"/>
+                                        <constraint firstAttribute="trailing" secondItem="AWw-I5-qZV" secondAttribute="trailing" constant="8" id="toc-dt-KKo"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameTextField" destination="AWw-I5-qZV" id="YgJ-Jr-hxv"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="vFZ-JQ-FZl" id="sGp-2F-0S2"/>
