@@ -1,2 +1,2 @@
 # ImageGallery
-This is a priject from this [course](http://web.stanford.edu/class/cs193p/cgi-bin/drupal/)
+This is a project from this [course](http://web.stanford.edu/class/cs193p/cgi-bin/drupal/)
